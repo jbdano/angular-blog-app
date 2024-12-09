@@ -1,24 +1,32 @@
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { AfterViewInit, Component } from '@angular/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+
+export interface BlogPost {
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
+}
 
 @Component({
   selector: 'app-blog',
-  imports: [CommonModule],
+  imports: [CommonModule, HttpClientModule],
   templateUrl: './blog.component.html',
   styleUrl: './blog.component.css'
 })
-export class BlogComponent {
+
+export class BlogComponent implements AfterViewInit {
 
   ApiUrl = 'https://jsonplaceholder.typicode.com/posts';
-  posts: any[] = [];
+  posts: BlogPost[] = [];
 
   constructor(private http: HttpClient) {}
 
-  getPosts() {
+  ngAfterViewInit() {
+    // this.blogComponent.getPosts();
     this.http.get(this.ApiUrl).subscribe((data) => {
-      console.log(data);
-      this.posts = data as any[];
+      this.posts = data as BlogPost[];
     });
   }
 

@@ -1,19 +1,15 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { Component } from '@angular/core';
 import { BlogComponent } from './blog/blog.component';
+import { RouterOutlet } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [BlogComponent, HttpClientModule],
+  imports: [BlogComponent, RouterOutlet, RouterModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent {
 
-  @ViewChild(BlogComponent) blogComponent!: BlogComponent;
-
-  ngAfterViewInit() {
-    this.blogComponent.getPosts();
-  }
 }
