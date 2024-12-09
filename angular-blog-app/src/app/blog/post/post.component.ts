@@ -1,5 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ActivatedRoute, RouterOutlet, RouterModule } from '@angular/router';
 import { BlogService } from '../blog.service';
@@ -17,7 +18,7 @@ export interface BlogPost {
 @Component({
   selector: 'app-post',
   standalone: true,
-  imports: [HttpClientModule, RouterOutlet, RouterModule],
+  imports: [HttpClientModule, CommonModule, RouterOutlet, RouterModule],
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css']
 })
@@ -32,6 +33,7 @@ export class PostComponent implements OnInit {
       this.postId = +params.get('id')!;
       this.blogService.getPostById(this.postId).subscribe((post) => {
         this.post = post;
+        console.log(post);
       });
     });
   }

@@ -14,12 +14,29 @@ import { BlogPost } from './post/post.component';
 })
 export class BlogComponent implements AfterViewInit {
   posts: BlogPost[] = [];
+  order: string = 'desc';
 
   constructor(private blogService: BlogService) {}
 
   ngAfterViewInit() {
     this.blogService.getPosts().subscribe((data) => {
       this.posts = data.posts;
+      this.sortPosts();
     });
+  }
+
+  sortPosts(): void {
+
+    this.posts.sort((a, b) => {
+      return a.title.localeCompare(b.title);
+    });
+
+    if (this.order === 'asc') {
+      this.order = 'desc';
+      this.posts = this.posts.reverse();
+    }
+    else {
+      this.order = 'asc';
+    }
   }
 }
