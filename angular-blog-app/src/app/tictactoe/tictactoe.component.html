@@ -1,0 +1,29 @@
+
+
+
+<div class="container">
+    <div class="row text-center" *ngIf="gameOver">
+        <div class="col-12">
+            <div class="alert alert-success m-0">Winner: {{ winner }}</div>
+        </div>
+    </div>
+    <div class="row text-center" *ngIf="!gameOver">
+        <div class="col-12">
+            <h2>Player Turn: {{ currentPlayer }}</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="board my-5">
+                <div class="box" *ngFor="let box of board; let i = index;" (click)="makeMove(i)">
+                    {{ box }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-12">
+            <button class="btn btn-primary" (click)="newGame()">Reset Game</button>
+        </div>
+    </div>
+</div>
