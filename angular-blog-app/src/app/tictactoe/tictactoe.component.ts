@@ -53,15 +53,10 @@ export class TictactoeComponent {
       [0,4,8],
       [2,4,6],
     ];
-console.log('<-------------------------->');
+
     rows.every((row) => {
-      console.log('checking row', row);
       winner = this.calculateRowWinner(row);
-      console.log('winner', winner);
-      if (winner) {
-        return false;
-      }
-      return true;
+      return !winner;
     });
 
     return winner;
